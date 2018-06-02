@@ -1,23 +1,63 @@
 <div>
   <h2 class="page-header">Register</h2>
   <form (submit)="onRegisterSubmit()" >
-    <div class="form-group">
+
+    <div class="form-group"
+        [ngClass]="{
+          'has-danger': Name.invalid && (Name.dirty || Name.touched),
+          'has-success': Name.valid && (  Name.dirty || Name.touched)}">
       <label for="name">Name</label>
-      <input type="text" [(ngModel)]="name" name="name" class="form-control" id="name" placeholder="Enter Name">
+      <input type="text" [(ngModel)]="name" name="name" class="form-control" id="name" placeholder="Enter Name" required #Name="ngModel">
+      <div class="form-control-feedback"
+      *ngIf="Name.errors && (Name.dirty || Name.touched)">
+       <p *ngIf="Name.errors.required">Name is required</p>
+       </div>
     </div>
-    <div class="form-group">
+
+    <div class="form-group"
+      [ngClass]="{
+        'has-danger': UserName.invalid && (UserName.dirty || UserName.touched),
+        'has-success': UserName.valid && (UserName.dirty || UserName.touched)
+          }">
       <label for="username">Username</label>
-      <input type="text" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Enter Username">
+      <input type="text" [(ngModel)]="username" name="username" class="form-control" id="username" placeholder="Enter Username" required #UserName="ngModel">
+      <div class="form-control-feedback"
+      *ngIf="UserName.errors && (UserName.dirty || UserName.touched)">
+       <p *ngIf="UserName.errors.required">Username is required</p>
+       </div>
     </div>
-    <div class="form-group">
+
+
+    <div class="form-group"
+      [ngClass]="{
+        'has-danger': Email.invalid && (Email.dirty || Email.touched),
+        'has-success': Email.valid && (Email.dirty || Email.touched)
+          }">
       <label for="email">Email</label>
-      <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+      <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email" #Email="ngModel" required pattern="[^ @]*@[^ @]*">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <div class="form-control-feedback"
+      *ngIf="Email.errors && (Email.dirty || Email.touched)">
+       <p *ngIf="Email.errors.required">Email is required</p>
+       <p *ngIf="Email.errors.pattern">Email must contain at least the @ character</p>
+      </div>
     </div>
-    <div class="form-group">
+
+
+    <div class="form-group"
+    [ngClass]="{
+      'has-danger': Password.invalid && (Password.dirty || Password.touched),
+      'has-success': Password.valid && (Password.dirty || Password.touched)
+        }">
       <label for="password">Password</label>
-      <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder=" Enter Password">
+      <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder=" Enter Password" #Password="ngModel" minlength="8">
+      <div class="form-control-feedback"
+      *ngIf="Password.errors && (Password.dirty || Password.touched)">
+         <p *ngIf="Password.errors.required">Password is required</p>
+         <p *ngIf="Password.errors.minlength">Password must be at least 8 characters long</p>
+      </div>
     </div>
+
     <input type="submit" class="btn btn-primary" value="Submit">
   </form>
   </div>

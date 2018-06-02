@@ -11,16 +11,25 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { BlogComponent } from './components/blog/blog.component';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { BlogService } from './services/blog.service';
+
 import { AuthGuard } from './guards/auth.guard';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
+import { DeleteBlogComponent } from './components/delete-blog/delete-blog.component';
+
 
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
   {path:'register', component: RegisterComponent},
+  {path:'blog', component: BlogComponent , canActivate:[AuthGuard]},
+  {path:'edit-blog/:id', component: EditBlogComponent , canActivate:[AuthGuard]},
+  {path:'delete-blog/:id', component: DeleteBlogComponent , canActivate:[AuthGuard]},
+  
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]}
@@ -34,7 +43,10 @@ const appRoutes: Routes =  [
     RegisterComponent,
     HomeComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    BlogComponent,
+    EditBlogComponent,
+    DeleteBlogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +55,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService,AuthService,AuthGuard],
+  providers: [ValidateService,AuthService,BlogService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

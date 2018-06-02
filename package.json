@@ -18,9 +18,10 @@
     "passport": "*",
     "passport-jwt": "*"
   },
-  "author": "Brad Traversy",
+  "author": "Muhammad Umair",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^1.6.4"
+    "@angular/cli": "^1.6.4",
+    "nodemon": "^1.17.5"
   }
 }
