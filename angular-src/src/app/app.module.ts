@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
 import { DeleteBlogComponent } from './components/delete-blog/delete-blog.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -47,11 +48,12 @@ const appRoutes: Routes =  [
     BlogComponent,
     EditBlogComponent,
     DeleteBlogComponent
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpModule,NgxPaginationModule,
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],

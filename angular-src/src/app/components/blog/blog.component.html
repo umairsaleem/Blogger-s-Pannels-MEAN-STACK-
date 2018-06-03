@@ -32,8 +32,8 @@
   [ngClass]="{
   'has-danger': Body.invalid && (Body.dirty || Body.touched),
   'has-success': Body.valid && (  Body.dirty || Body.touched)}">
-  <label for="title">Title</label>
-  <textarea  name="body" [(ngModel)]="body" class="form-control" placeholder="Enter Body" required minlength="20" maxlength="50"  #Body="ngModel">
+  <label for="title">Body</label>
+  <textarea  name="body" [(ngModel)]="body" class="form-control" placeholder="Enter Body" required minlength="20"   #Body="ngModel">
     </textarea>
 
     <div class="form-control-feedback"
@@ -52,7 +52,7 @@
 
 <div *ngIf="!newPost">
   <!-- Panel Outer Layer -->
-  <div class="card " *ngFor="let blog of blogPosts">
+  <div class="card " *ngFor="let blog of blogPosts | paginate :{itemsPerPage:2 , currentPage :p}">
     <br>
     <!-- Panel Title -->
     <div class="card-header">
@@ -146,7 +146,9 @@
     </ul>
     <!-- Post Comment Box: End -->
   </div> 
-  </div>
+  </div> 
+  <br />
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
   <!-- Panel Outer Layer -->
 </div>
 <!-- Panel End -->
